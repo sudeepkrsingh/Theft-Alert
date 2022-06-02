@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Theft Alert</title>
+  <style>
+    #talertbtn {
+      padding: 10px;
+    }
+
+    body {
+      background-color: #0a1014;
+    }
+
+    .talert-box-container {
+      background-color: #0a1014;
+      height: 100%;
+      width: 100%;
+    }
+
+    .talert-box {
+      background-color: aliceblue;
+      width: 280px;
+      margin: auto;
+    }
+
+    .header {
+      color: blueviolet;
+      padding: 0px;
+      margin: 0px;
+    }
+     button {
+      margin: auto;
+     }
+    /* @keyframes slideRt {
+      from {
+        left: 0px;
+      }
+
+      to {
+        right: 0px;
+      }
+    } */
+  </style>
+</head>
+
+<body>
+  <div height="100px" class="header"></div>
+  <div class="talert-box-container">
+    <div class="talert-box">
+      <button id="talertbtn" onclick="talert();slideBtn()" style="transition: 2s;">Activate Theft Alert</button>
+      <input type="text" id="charging" style="display: none;">
+      <audio loop>
+        <source src="xiaomi_original.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </div>
+  <script>
+    function slideBtn() {
+
+      var alertBtn = document.querySelector('button').style.float = "right";
+      alertBtn.style.margin = "auto";
+      // alertBtn.style.transition = "2s";
+      alertBtn.animation = "slideRt 4s 1";
+    }
+    window.onload = function () {
+      function updateBatteryStatus(battery) {
+        document.querySelector('#charging').value = battery.charging ? 'charging' : 'not charging';
+      }
+
+      navigator.getBattery().then(function (battery) {
+
+        updateBatteryStatus(battery);
+        battery.onchargingchange = function () {
+          updateBatteryStatus(battery);
+        };
+      });
+    };
+    function talert() {
+
+      if (document.querySelector('#charging').value === 'charging') {
+        if (document.querySelector('#charging').value === 'not charging') {
+          document.querySelector('audio').pause();
+        }
+
+      }
+      else {
+        document.querySelector('audio').pause();
+      }
+    }
+
+
+  </script>
+
+</body>
+
+</html>
