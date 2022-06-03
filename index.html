@@ -23,8 +23,13 @@
 
     .talert-box {
       background-color: aliceblue;
-      width: 280px;
+      width: 294px;
       margin: auto;
+      margin-top: 50px;
+      border-radius: 20px;
+      padding: 0px;
+      /* position: relative; */
+      height: 39px;
     }
 
     .header {
@@ -32,18 +37,31 @@
       padding: 0px;
       margin: 0px;
     }
-     button {
+
+    button {
       margin: auto;
-     }
-    /* @keyframes slideRt {
+      border-radius: 20px;
+      border: none;
+      color: rgb(255, 255, 255);
+      background-image: linear-gradient(90deg, #0065ff, #6942ef, #6554c0, #008cff, #0065ff, #6942ef);
+      background-size: 400%;
+      position: relative;
+      height: 39px;
+    }
+
+    @keyframes slideRt {
       from {
         left: 0px;
+        background-image: linear-gradient(90deg, #0065ff, #6942ef, #6554c0, #008cff, #0065ff, #6942ef);
+        ;
       }
 
       to {
-        right: 0px;
+        left: 150px;
+        background-image: linear-gradient(90deg, #6942ef, #0065ff, #008cff, #6554c0, #6942ef, #658fce);
+        ;
       }
-    } */
+    }
   </style>
 </head>
 
@@ -51,20 +69,24 @@
   <div height="100px" class="header"></div>
   <div class="talert-box-container">
     <div class="talert-box">
-      <button id="talertbtn" onclick="talert();slideBtn()" style="transition: 2s;">Activate Theft Alert</button>
+      <button id="talertbtn" onclick="toggleplay()">Activate Theft Alert</button>
       <input type="text" id="charging" style="display: none;">
+
       <audio loop>
         <source src="xiaomi_original.mp3" type="audio/mpeg">
       </audio>
     </div>
   </div>
   <script>
-    function slideBtn() {
 
-      var alertBtn = document.querySelector('button').style.float = "right";
-      alertBtn.style.margin = "auto";
-      // alertBtn.style.transition = "2s";
-      alertBtn.animation = "slideRt 4s 1";
+    function slideBtn() {
+      document.querySelector('button').style.animation = "slideRt 2s 1";
+      // document.querySelector('button').style.position = "absolute";
+      // alertBtn = document.querySelector('button').style.right = "0px";
+      document.querySelector('button').style.left = "150px";
+      
+      document.querySelector('button').innerText = "Deactivate Theft Alert";
+
     }
     window.onload = function () {
       function updateBatteryStatus(battery) {
@@ -83,21 +105,25 @@
 
       if (document.querySelector('#charging').value === 'charging') {
         document.querySelector('audio').play();
-      
-
       }
       // else {
       //   document.querySelector('audio').pause();
       // }
     }
-     navigator.getBattery().then(function (battery) {
-
-      battery.onchargingchange = chargingChange();
-
-      function chargingChange() {
-        document.querySelector('audio').play();
+    // window.onload(talert());
+    // window.onload(slideBtn());
+    function toggleplay() {
+      if (document.querySelector('button').innerText === "Deactivate Theft Alert") {
+        document.querySelector('button').style.left = "0px";
+        document.querySelector('button').innerText = "Activate Theft Alert";
+        document.querySelector('audio').pause();
+      } else {
+        talert();
+        slideBtn();
       }
-    });
+    }
+
+
   </script>
 
 </body>
