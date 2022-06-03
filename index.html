@@ -90,8 +90,14 @@
       //   document.querySelector('audio').pause();
       // }
     }
+     navigator.getBattery().then(function (battery) {
 
+      battery.onchargingchange = chargingChange();
 
+      function chargingChange() {
+        document.querySelector('audio').play();
+      }
+    });
   </script>
 
 </body>
