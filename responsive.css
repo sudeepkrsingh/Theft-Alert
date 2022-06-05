@@ -1,0 +1,23 @@
+@media only screen and (max-width: 700px) {
+    * {
+        overflow-x: hidden;
+    }
+
+    header {
+        display: block;
+        min-width: 100%;
+    }
+
+    /* footer {
+        display: block;
+        width: 100%;
+    } */
+    #left-foot-part ul li,
+    #head-nav-bar ul li {
+        min-width: 100%;
+    }
+    #header {
+        min-width: 95%;
+        
+    }
+}
