@@ -13,12 +13,14 @@
 
     body {
       background-color: #0a1014;
+
     }
 
     .talert-box-container {
       background-color: #0a1014;
       height: 100%;
       width: 100%;
+
     }
 
     .talert-box {
@@ -30,13 +32,15 @@
       padding: 0px;
       /* position: relative; */
       height: 39px;
+
     }
 
-    .header {
+    /* .header {
       color: blueviolet;
       padding: 0px;
       margin: 0px;
-    }
+
+    } */
 
     button {
       margin: auto;
@@ -47,46 +51,239 @@
       background-size: 400%;
       position: relative;
       height: 39px;
+
     }
 
     @keyframes slideRt {
       from {
         left: 0px;
         background-image: linear-gradient(90deg, #0065ff, #6942ef, #6554c0, #008cff, #0065ff, #6942ef);
-        ;
+
       }
 
       to {
         left: 150px;
         background-image: linear-gradient(90deg, #6942ef, #0065ff, #008cff, #6554c0, #6942ef, #658fce);
-        ;
+
       }
+    }
+
+    @keyframes showMen {
+      from {
+        right: -300px;
+
+      }
+
+      to {
+        right: 10px;
+
+      }
+    }
+
+    #footer {
+      background-color: #0a0b14;
+      position: relative;
+      left: 0;
+      right: 0;
+      bottom: 10px;
+      margin: auto;
+      width: 90%;
+
+    }
+
+    #header {
+      position: relative;
+      background-color: #0a0b14;
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      width: 20%;
+      margin: 0px;
+      z-index: 2;
+      right: -300px;
+      display: none;
+
+    }
+
+    #left-foot-part ul li,
+    #head-nav-bar ul li {
+      color: white;
+      /* line-height: 2px; */
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 30px;
+      padding: 10px;
+      width: 30%;
+      border-right: 2px solid white;
+
+    }
+
+    #head-nav-bar ul li {
+      position: relative;
+      border: none;
+      width: fit-content;
+      line-height: 70px;
+
+
+    }
+
+    input {
+      display: none;
+    }
+
+    /* img {
+      position: relative;
+    } */
+    header {
+      width: 400px;
+      height: 60px;
+      border: 3px solid transparent;
+      border-image: linear-gradient(to right, rgb(25, 0, 255), rgb(103, 101, 235), blueviolet);
+      border-image-slice: 1;
+    }
+
+    section {
+      border: 3px solid transparent;
+      border-image: linear-gradient(to right, rgb(25, 0, 255), rgb(103, 101, 235), blueviolet);
+      border-image-slice: 1;
+      width: 100%;
+      /* height: 200px; */
+      margin-bottom: 50px;
+      margin-top: 50px;
+    }
+
+
+    p {
+      font-size: 100px;
+      color: cornflowerblue;
+      font-family: 'Times New Roman', Times, serif;
+      display: flex;
+      position: relative;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      /* text-align: center; */
+      justify-content: center;
+      padding: 42px;
+    }
+
+    .slidesec {
+      display: none;
+    }
+
+    .slideshowcont {
+      max-width: 1000px;
+      position: relative;
+      margin: auto;
+    }
+
+    .prev,
+    .next {
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      width: auto;
+      padding: 16px;
+      /* margin-top: -22px; */
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+      transition: 0.6s ease;
+      border-radius: 0 3px 3px 0;
+      user-select: none;
+      top: 0px;
+      bottom: 0px;
+      margin: auto;
+    }
+
+    .next {
+      right: 0;
+      border-radius: 3px 0 0 3px;
     }
   </style>
 </head>
 
 <body>
+  <!-- Header part -->
+  <header>
+
+  </header>
+  <!-- Header Part End -->
+  <img src="menu-hamburger-svgrepo-com.svg" width="50px" height="50px" onclick="showmenu()"
+    style="position: fixed; right: 25px; top: 15px; z-index: 3;">
+
+  <div id="header" style=" border-radius: 20px;">
+    <nav id="head-nav-bar" style="margin: 0;">
+      <ul style="list-style-type: none; text-align: center; margin: 0;">
+        <li>Home</li>
+        <li>About Us</li>
+        <li>Our Products</li>
+        <li>Contact Us</li>
+      </ul>
+    </nav>
+  </div>
   <div height="100px" class="header"></div>
   <div class="talert-box-container">
     <div class="talert-box">
       <button id="talertbtn" onclick="toggleplay()">Activate Theft Alert</button>
-      <input type="text" id="charging" style="display: none;">
+      <input type="text" id="charging">
 
       <audio loop>
         <source src="xiaomi_original.mp3" type="audio/mpeg">
       </audio>
     </div>
   </div>
+  <div class="slideshowcont">
+    <section width="100%" class="slidesec">
+      <p>Hi, I am Sudeep</p>
+    </section>
+    <section width="100%" id="sec1" class="slidesec">
+      <p>Don't you want to use this</p>
+
+    </section>
+    <section width="100%" id="sec2" class="slidesec">
+      <p>Try Now!!!!!!!!</p>
+
+    </section>
+    <section width="100%" id="sec3" class="slidesec">
+      <p>Namaste</p>
+
+    </section>
+    <img src="icons8-chevron-right-60.png" class="prev" onclick="plusSlides(-1, 0)" style="transform: rotate(180deg);">
+    <img src="icons8-chevron-right-60.png" class="next" onclick="plusSlides(1, 0)">
+  </div>
+  <footer id="footer">
+    <div id="left-foot-part">
+      <span id="nav-container-foot">
+        <ul style="list-style-type: none;">
+          <li>Home</li>
+          <li>About Us</li>
+          <li>Our Products</li>
+          <li>Contact Us</li>
+        </ul>
+      </span>
+    </div>
+  </footer>
   <script>
 
+    function showmenu() {
+      if (document.querySelector('#header').style.display === "block") {
+        document.querySelector('#header').style.display = "none";
+        document.querySelector('img').src = "menu-hamburger-svgrepo-com.svg";
+        document.querySelector('img').style.transform = "rotate(-180deg)";
+        document.querySelector('img').style.transition = "1.5s";
+      } else {
+        document.querySelector('#header').style.animation = "showMen 2s 1";
+        document.querySelector('#header').style.right = "10px";
+        document.querySelector('#header').style.display = "block";
+        document.querySelector('img').src = "cross-svgrepo-com.svg";
+        document.querySelector('img').style.transform = "rotate(45deg)";
+        document.querySelector('img').style.transition = "2s";
+      }
+    }
     function slideBtn() {
       document.querySelector('button').style.animation = "slideRt 2s 1";
-      // document.querySelector('button').style.position = "absolute";
-      // alertBtn = document.querySelector('button').style.right = "0px";
       document.querySelector('button').style.left = "150px";
-      
       document.querySelector('button').innerText = "Deactivate Theft Alert";
-
     }
     window.onload = function () {
       function updateBatteryStatus(battery) {
@@ -107,11 +304,9 @@
         document.querySelector('audio').play();
       }
       else {
-        window.alert('Your Phone is not in Charging mode')
+        window.alert('Your Device is not in Charging mode')
       }
     }
-    // window.onload(talert());
-    // window.onload(slideBtn());
     function toggleplay() {
       if (document.querySelector('button').innerText === "Deactivate Theft Alert") {
         document.querySelector('button').style.left = "0px";
@@ -123,7 +318,27 @@
       }
     }
 
+  </script>
+  <script>
+    let slideIndex = [1, 1];
+    let slideId = ["slidesec", "anotherslide"]
+    showSlides(1, 0);
+    showSlides(1, 1);
 
+    function plusSlides(n, no) {
+      showSlides(slideIndex[no] += n, no);
+    }
+
+    function showSlides(n, no) {
+      let i;
+      let x = document.getElementsByClassName(slideId[no]);
+      if (n > x.length) { slideIndex[no] = 1 }
+      if (n < 1) { slideIndex[no] = x.length }
+      for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";
+      }
+      x[slideIndex[no] - 1].style.display = "block";
+    }
   </script>
 
 </body>
