@@ -303,13 +303,32 @@
         };
       });
     };
-    function talert() {
+//     function talert() {
+
+//       if (document.querySelector('#charging').value === 'charging') {
+//         document.querySelector('audio').play();
+//       }
+//       else {
+//         window.alert('Your Device is not in Charging mode')
+//       }
+//     }
+        function talert() {
 
       if (document.querySelector('#charging').value === 'charging') {
-        document.querySelector('audio').play();
+        setTimeout(myGreeting, 2000);
+        // if (document.querySelector("#loc").value != ) {
+        // document.querySelector('audio').play();
+        // }
       }
       else {
         window.alert('Your Device is not in Charging mode')
+      }
+    }
+    function myGreeting() {
+      if (document.querySelector('#charging').value === 'not charging') {
+             
+        document.querySelector('audio').play();
+        
       }
     }
     function toggleplay() {
