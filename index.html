@@ -315,7 +315,7 @@
         function talert() {
 
       if (document.querySelector('#charging').value === 'charging') {
-        setInterval(myGreeting, 900);
+        var myGreetint = setInterval(myGreeting, 900);
         // if (document.querySelector("#loc").value != ) {
         // document.querySelector('audio').play();
         // }
@@ -339,6 +339,7 @@
         document.querySelector('button').style.left = "0px";
         document.querySelector('button').innerText = "Activate Theft Alert";
         document.querySelector('audio').pause();
+        clearInterval(myGreetint);
       } else {
         talert();
         slideBtn();
