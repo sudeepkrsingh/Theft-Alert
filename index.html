@@ -6,23 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Theft Alert</title>
-  <script type="text/javascript">
-    
-    function preventBack() {
-      window.history.forward();
-    }
-    setTimeout("preventBack()", 0);
-    window.onunload = function () { null };
-  </script>
-  <!-- <meta charset="utf-8">
-      <script>
-        if (location.protocol !== 'https:') {
-          location.protocol = 'https:'
-        }
-      </script> -->
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
-  <link rel="stylesheet" href="responsive.css">
+    <link rel="stylesheet" href="responsive.css">
   <style>
     #talertbtn {
       padding: 10px;
@@ -253,32 +237,7 @@
       </audio>
     </div>
   </div>
-  <div class="disabled optval" style="color: cornflowerblue; font-size: 30px; ">
-    <div>
-      <label><input type="checkbox" class="disabled" id="wakeLockCheckbox"> Activate screen Wake Lock</label>
-    </div>
-    <div>
-      <label><input type="checkbox" class="disabled" id="reacquireCheckbox"> Re-Acquire screen Wake Lock On Visibility
-        Changes</label>
-    </div>
-  </div>
-  <div>
-    <button id="fullScreenButton" class="disabled" type="button" onclick="valid()">Go Full Screen</button>
-
-  </div>
-
-  <p id="statusDiv"></p>
-  <div id="pwd-cont" class="disabled">
-
-    <p id="pwd-txt">Enter your pin to exit. </p>
-    <input type="password" id="pwd" minlength="4" placeholder="Enter your pin">
-
-  </div>
-  <div id="pin-cont">
-    <p id="pin-txt">Remember this pin</p>
-    <input type="password" placeholder="Create your pin" minlength="8" id="pin" onchange="show()">
-
-  </div>
+  
   <div class="slideshowcont">
     <section width="100%" class="slidesec">
       <p>Hello</p>
