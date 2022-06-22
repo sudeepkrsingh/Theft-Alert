@@ -47,6 +47,7 @@ fullScreenButton.addEventListener('click', () => {
       document.querySelector('#pwd').value = "";
       fullScreenButton.textContent = 'Enter Full Screen';
       document.querySelector('.disabled').style.display ="block";
+       document.querySelector('.talert-box-container').style.display = "block";
       // document.querySelector('.disabled').disabled = false;
       document.querySelector('#pwd-txt').style.display = "none";
 
