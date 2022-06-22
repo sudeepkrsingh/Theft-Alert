@@ -36,6 +36,7 @@ fullScreenButton.addEventListener('click', () => {
     fullScreenButton.innerHTML = "Exit full screen";
     document.querySelector('.disabled').style.display = "none";
     // document.querySelector('.disabled').disabled = true;
+    document.querySelector('.talert-box-container').style.display = "none";
     document.querySelector('#pwd-cont').style.display = "block";
   }
   else {
