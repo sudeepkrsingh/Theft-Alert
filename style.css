@@ -1,0 +1,115 @@
+    body {
+      background-color: #0a1014;
+
+    }
+
+    * {
+      margin: 0px;
+      padding: 0px;
+    }
+
+    p {
+      color: cornflowerblue;
+      font-size: 40px;
+    }
+
+    #pin,
+    #pwd {
+      font-size: 40px;
+      border-image: linear-gradient(to right, rgb(25, 0, 255), rgb(103, 101, 235), blueviolet);
+      border-image-slice: 1;
+    }
+
+    #pin,
+    #pwd {
+      padding: 20px;
+
+    }
+
+    #pwd-cont {
+      padding: 20px;
+      position: absolute;
+      left: 0;
+      right: 0;
+      margin: auto;
+      margin: 5px;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-around;
+    }
+
+    #pwd-cont input {
+      margin: auto;
+      display: flex;
+    }
+
+    #pin-cont {
+
+      /* background-color: #0a1014; */
+      /* width: 100%;
+      height: 100%; */
+      /* z-index: 2; */
+      padding: 20px;
+
+      position: fixed;
+
+      left: 0;
+      right: 0;
+      margin: auto;
+      margin: 5px;
+      display: flex;
+
+      align-items: baseline;
+
+      justify-content: space-around;
+      /* border: 3px solid transparent;
+      border-image: linear-gradient(to right, rgb(25, 0, 255), rgb(103, 101, 235), blueviolet);
+      border-image-slice: 1; */
+    }
+
+    button {
+      border-radius: 20px;
+      border: none;
+      color: rgb(255, 255, 255);
+      background-image: linear-gradient(90deg, #0065ff, #6942ef, #6554c0, #008cff, #0065ff, #6942ef);
+      background-size: 400%;
+      height: 39px;
+      padding: 10px;
+      margin: auto;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-image: linear-gradient(90deg, #6942ef, #0065ff, #008cff, #6554c0, #6942ef, #658fce);
+      background-size: 400%;
+    }
+
+    button:active {
+      border-image: linear-gradient(to right, rgb(25, 0, 255), rgb(103, 101, 235), blueviolet);
+      border-image-slice: 1;
+      border: 3px solid transparent;
+    }
+
+    #pin-txt,
+    #pwd-txt {
+      border-image: linear-gradient(to right, rgb(25, 0, 255), rgb(103, 101, 235), blueviolet);
+      border-image-slice: 1;
+      position: absolute;
+      top: -10px;
+      left: 0;
+      right: 0;
+      background-color: #0a1014;
+      display: flex;
+      justify-content: space-around;
+    }
+
+    div.optval {
+      border: 3px solid transparent;
+      border-image: linear-gradient(to right, rgb(25, 0, 255), rgb(103, 101, 235), blueviolet);
+      border-image-slice: 1;
+
+      padding: 20px;
+      text-align: center;
+      margin-bottom: 50px;
+      margin-top: 50px;
+    }
