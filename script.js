@@ -1,94 +1,155 @@
-feather.replace();
+const wakeLockCheckbox = document.querySelector('#wakeLockCheckbox');
+const statusDiv = document.querySelector('#statusDiv');
+const reaquireCheckbox = document.querySelector('#reacquireCheckbox');
+const fullScreenButton = document.querySelector('#fullScreenButton');
 
-const controls = document.querySelector('.controls');
-const cameraOptions = document.querySelector('.video-options>select');
-const video = document.querySelector('video');
-const canvas = document.querySelector('canvas');
-const screenshotImage = document.querySelector('img');
-const buttons = [...controls.querySelectorAll('button')];
-let streamStarted = false;
-
-const [play, pause, screenshot] = buttons;
-
-const constraints = {
-  video: {
-    width: {
-      min: 1280,
-      ideal: 1920,
-      max: 2560,
-    },
-    height: {
-      min: 720,
-      ideal: 1080,
-      max: 1440
-    },
+var pin = document.querySelector('#pin').value;
+var pwd = document.querySelector('#pwd').value;
+// document.querySelector('.disabled').disabled = true;
+document.querySelector('button').style.display = "none";
+document.querySelector('#pwd-cont').style.display = "none";
+document.querySelector('.disabled').style.display = "none";
+function show() {
+  var pin = document.querySelector('#pin').value;
+  if (pin.length === 4) {
+  // document.querySelector('.disabled').disabled = false;
+  document.querySelector('button').style.display = "block";
+  document.querySelector('.disabled').style.display ="block";
+  document.querySelector('#pin-cont').style.visibility = "hidden";
+  } 
+  else {
+    const pintxt = document.querySelector('#pin-txt');
+    document.querySelector('#pin-txt').innerHTML = "Please enter 4 number pin!";
+    pintxt.style.color = "red";
   }
-};
+}
 
-const getCameraSelection = async () => {
-  const devices = await navigator.mediaDevices.enumerateDevices();
-  const videoDevices = devices.filter(device => device.kind === 'videoinput');
-  const options = videoDevices.map(videoDevice => {
-    return `<option value="${videoDevice.deviceId}">${videoDevice.label}</option>`;
+
+fullScreenButton.addEventListener('click', () => {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen();
+    fullScreenButton.innerHTML = "Exit full screen";
+    document.querySelector('.disabled').style.display = "none";
+    // document.querySelector('.disabled').disabled = true;
+    document.querySelector('#pwd-cont').style.display = "block";
+  }
+  else {
+    var pin = document.querySelector('#pin').value;
+    var pwd = document.querySelector('#pwd').value;
+    if (pwd === pin && pwd != "") {
+      document.exitFullscreen();
+      document.querySelector('#pwd').value = "";
+      fullScreenButton.textContent = 'Enter Full Screen';
+      document.querySelector('.disabled').style.display ="block";
+      // document.querySelector('.disabled').disabled = false;
+      document.querySelector('#pwd-txt').style.display = "none";
+
+    }
+    else {
+      const pintxt = document.querySelector('#pwd-txt');
+      document.querySelector('#pwd-txt').innerHTML = "Invalid Pin!";
+      pintxt.style.color = "red";
+    }
+
+
+  }
+});
+
+if ('WakeLock' in window && 'request' in window.WakeLock) {
+  let wakeLock = null;
+
+  const requestWakeLock = () => {
+    const controller = new AbortController();
+    const signal = controller.signal;
+    window.WakeLock.request('screen', { signal })
+      .catch((e) => {
+        if (e.name === 'AbortError') {
+          wakeLockCheckbox.checked = false;
+          statusDiv.textContent = 'Wake Lock was aborted';
+          console.log('Wake Lock was aborted');
+        } else {
+          statusDiv.textContent = `${e.name}, ${e.message}`;
+          console.error(`${e.name}, ${e.message}`);
+        }
+      });
+    wakeLockCheckbox.checked = true;
+    statusDiv.textContent = 'Wake Lock is active';
+    console.log('Wake Lock is active');
+    return controller;
+  };
+
+  wakeLockCheckbox.addEventListener('change', () => {
+    if (wakeLockCheckbox.checked) {
+      wakeLock = requestWakeLock();
+    } else {
+      wakeLock.abort();
+      wakeLock = null;
+    }
   });
-  cameraOptions.innerHTML = options.join('');
-};
 
-play.onclick = () => {
-  if (streamStarted) {
-    video.play();
-    play.classList.add('d-none');
-    pause.classList.remove('d-none');
-    return;
-  }
-  if ('mediaDevices' in navigator && navigator.mediaDevices.getUserMedia) {
-    const updatedConstraints = {
-      ...constraints,
-      deviceId: {
-        exact: cameraOptions.value
-      }
-    };
-    startStream(updatedConstraints);
-  }
-};
-
-const startStream = async (constraints) => {
-  const stream = await navigator.mediaDevices.getUserMedia(constraints);
-  handleStream(stream);
-};
-
-const handleStream = (stream) => {
-  video.srcObject = stream;
-  play.classList.add('d-none');
-  pause.classList.remove('d-none');
-  screenshot.classList.remove('d-none');
-  streamStarted = true;
-};
-
-getCameraSelection();
-cameraOptions.onchange = () => {
-  const updatedConstraints = {
-    ...constraints,
-    deviceId: {
-      exact: cameraOptions.value
+  const handleVisibilityChange = () => {
+    if (wakeLock !== null && document.visibilityState === 'visible') {
+      wakeLock = requestWakeLock();
     }
   };
-  startStream(updatedConstraints);
-};
 
-const pauseStream = () => {
-  video.pause();
-  play.classList.remove('d-none');
-  pause.classList.add('d-none');
-};
+  reaquireCheckbox.addEventListener('change', () => {
+    if (reaquireCheckbox.checked) {
+      document.addEventListener('visibilitychange', handleVisibilityChange);
+      document.addEventListener('fullscreenchange', handleVisibilityChange);
+    } else {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      document.removeEventListener('fullscreenchange', handleVisibilityChange);
+    }
+  });
+} else if ('wakeLock' in navigator && 'request' in navigator.wakeLock) {
+  let wakeLock = null;
 
-const doScreenshot = () => {
-  canvas.width = video.videoWidth;
-  canvas.height = video.videoHeight;
-  canvas.getContext('2d').drawImage(video, 0, 0);
-  screenshotImage.src = canvas.toDataURL('image/webp');
-  screenshotImage.classList.remove('d-none');
-};
+  const requestWakeLock = async () => {
+    try {
+      wakeLock = await navigator.wakeLock.request('screen');
+      wakeLock.addEventListener('release', (e) => {
+        console.log(e);
+        wakeLockCheckbox.checked = false;
+        statusDiv.textContent = 'Wake Lock was released';
+        console.log('Wake Lock was released');
+      });
+      wakeLockCheckbox.checked = true;
+      statusDiv.textContent = 'Wake Lock is active';
+      console.log('Wake Lock is active');
+    } catch (e) {
+      wakeLockCheckbox.checked = false;
+      statusDiv.textContent = `${e.name}, ${e.message}`;
+      console.error(`${e.name}, ${e.message}`);
+    }
+  };
 
-pause.onclick = pauseStream;
-screenshot.onclick = doScreenshot;
+  wakeLockCheckbox.addEventListener('change', () => {
+    if (wakeLockCheckbox.checked) {
+      requestWakeLock();
+    } else {
+      wakeLock.release();
+      wakeLock = null;
+    }
+  });
+
+  const handleVisibilityChange = () => {
+    if (wakeLock !== null && document.visibilityState === 'visible') {
+      requestWakeLock();
+    }
+  };
+
+  reaquireCheckbox.addEventListener('change', () => {
+    if (reaquireCheckbox.checked) {
+      document.addEventListener('visibilitychange', handleVisibilityChange);
+      document.addEventListener('fullscreenchange', handleVisibilityChange);
+    } else {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      document.removeEventListener('fullscreenchange', handleVisibilityChange);
+    }
+  });
+} else {
+  statusDiv.textContent = 'Wake Lock API not supported.';
+  console.error('Wake Lock API not supported.');
+}
+
