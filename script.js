@@ -2,13 +2,15 @@ const wakeLockCheckbox = document.querySelector('#wakeLockCheckbox');
 const statusDiv = document.querySelector('#statusDiv');
 const reaquireCheckbox = document.querySelector('#reacquireCheckbox');
 const fullScreenButton = document.querySelector('#fullScreenButton');
-
+document.querySelector('.talert-box-container').style.display = "none";
 var pin = document.querySelector('#pin').value;
 var pwd = document.querySelector('#pwd').value;
-// document.querySelector('.disabled').disabled = true;
+document.querySelector('#fullScreenButton').style.display = "none";
 document.querySelector('button').style.display = "none";
 document.querySelector('#pwd-cont').style.display = "none";
 document.querySelector('.disabled').style.display = "none";
+
+
 function show() {
   var pin = document.querySelector('#pin').value;
   if (pin.length === 4) {
@@ -16,6 +18,9 @@ function show() {
   document.querySelector('button').style.display = "block";
   document.querySelector('.disabled').style.display ="block";
   document.querySelector('#pin-cont').style.visibility = "hidden";
+  document.querySelector('#pin-cont').style.display = "none";
+  document.querySelector('#fullScreenButton').style.display = "block";
+  document.querySelector('.talert-box-container').style.display = "block";
   } 
   else {
     const pintxt = document.querySelector('#pin-txt');
