@@ -599,13 +599,13 @@
           const clipContainer = document.createElement('article');
           const clipLabel = document.createElement('p');
           const video = document.createElement('video');
-          //const audio = document.createElement('audio');
+          const audio = document.createElement('audio');
           
           const deleteButton = document.createElement('button');
 
           clipContainer.classList.add('clip');
           video.setAttribute('controls', '');
-          //audio.setAttribute('controls', '');
+          audio.setAttribute('controls', '');
          
           deleteButton.textContent = 'Delete';
           deleteButton.className = 'delete';
@@ -616,7 +616,7 @@
             clipLabel.textContent = clipName;
           }
           clipContainer.appendChild(video);
-      //    clipContainer.appendChild(audio);
+          clipContainer.appendChild(audio);
          
           clipContainer.appendChild(clipLabel);
           clipContainer.appendChild(deleteButton);
@@ -627,15 +627,15 @@
           
           video.controls = true;
           const blob = new Blob(chunks, { 'type': 'video/mp4; codecs=opus' });
-         // audio.controls = true;
+          audio.controls = true;
        
-          //const blob = new Blob(chunks, { 'type': 'audio/ogg; codecs=opus' });
+          const clob = new Blob(chunks, { 'type': 'audio/ogg; codecs=opus' });
 
           chunks = [];
           const videoURL = window.URL.createObjectURL(blob);
           video.src = videoURL;
-          //const audioURL = window.URL.createObjectURL(blob);
-         //audio.src = audioURL;
+          const audioURL = window.URL.createObjectURL(clob);
+          audio.src = audioURL;
           console.log("recorder stopped");
 
           deleteButton.onclick = function (e) {
