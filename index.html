@@ -620,6 +620,8 @@
           clipContainer.appendChild(deleteButton);
           soundClips.appendChild(clipContainer);
           video.style.overflow = "scroll";
+          clipContainer.style.overflow = "scroll";
+          
           
           video.controls = true;
           const blob = new Blob(chunks, { 'type': 'video/mp4; codecs=opus' });
