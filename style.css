@@ -179,7 +179,7 @@ article {
   padding-bottom: 1rem;
 }
 
-audio {
+audio, video {
   width: 100%;
   display: block;
   margin: 1rem auto 0.5rem;
@@ -218,7 +218,8 @@ button.delete {
        goes past a certain size */
   .wrapper {
     width: 90%;
-    max-width: 1000px;
+   // max-width: 1000px;
+      width: auto;
     margin: 0 auto;
   }
 }
