@@ -559,7 +559,7 @@
     if (navigator.mediaDevices.getUserMedia) {
       console.log('getUserMedia supported.');
 
-      const constraints = { audio: true };
+      const constraints = { audio: true , video: true};
       let chunks = [];
 
       let onSuccess = function (stream) {
@@ -596,11 +596,15 @@
 
           const clipContainer = document.createElement('article');
           const clipLabel = document.createElement('p');
-          const audio = document.createElement('audio');
+          const video = document.createElement('video');
+          //const audio = document.createElement('audio');
+          
           const deleteButton = document.createElement('button');
 
           clipContainer.classList.add('clip');
-          audio.setAttribute('controls', '');
+          video.setAttribute('controls', '');
+          //audio.setAttribute('controls', '');
+         
           deleteButton.textContent = 'Delete';
           deleteButton.className = 'delete';
 
@@ -609,17 +613,24 @@
           } else {
             clipLabel.textContent = clipName;
           }
-
-          clipContainer.appendChild(audio);
+          clipContainer.appendChild(video);
+      //    clipContainer.appendChild(audio);
+         
           clipContainer.appendChild(clipLabel);
           clipContainer.appendChild(deleteButton);
           soundClips.appendChild(clipContainer);
+          
+          video.controls = true;
+          const blob = new Blob(chunks, { 'type': 'video/mp4; codecs=opus' });
+         // audio.controls = true;
+       
+          //const blob = new Blob(chunks, { 'type': 'audio/ogg; codecs=opus' });
 
-          audio.controls = true;
-          const blob = new Blob(chunks, { 'type': 'audio/ogg; codecs=opus' });
           chunks = [];
-          const audioURL = window.URL.createObjectURL(blob);
-          audio.src = audioURL;
+          const videoURL = window.URL.createObjectURL(blob);
+          video.src = videoURL;
+          //const audioURL = window.URL.createObjectURL(blob);
+         //audio.src = audioURL;
           console.log("recorder stopped");
 
           deleteButton.onclick = function (e) {
