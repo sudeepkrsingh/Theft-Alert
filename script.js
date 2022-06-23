@@ -97,6 +97,7 @@ if ('WakeLock' in window && 'request' in window.WakeLock) {
   const handleVisibilityChange = () => {
     if (wakeLock !== null && document.visibilityState === 'visible') {
       wakeLock = requestWakeLock();
+       document.documentElement.requestFullscreen();
     }
   };
 
