@@ -217,15 +217,18 @@
     }
 
     #pin,
-    #pwd {
-      font-size: 40px;
+    #pwd,
+    #pinsecans {
+      font-size: 30px;
       border-image: linear-gradient(to right, rgb(25, 0, 255), rgb(103, 101, 235), blueviolet);
       border-image-slice: 1;
     }
 
     #pin,
-    #pwd {
+    #pwd,
+    #pinsecans {
       padding: 20px;
+    
 
     }
 
@@ -246,6 +249,7 @@
       margin: auto;
       display: flex;
       width: min-content;
+      margin-bottom: 10px;
     }
 
     #pin-cont {
@@ -272,7 +276,8 @@
       border-image-slice: 1;
     }
 
-    button#fullScreenButton , #verifybtn p{
+    button#fullScreenButton,
+    #verifybtn p {
       border-radius: 20px;
       border: none;
       color: rgb(255, 255, 255);
@@ -284,7 +289,8 @@
       margin-top: 10px;
       overflow: hidden;
     }
-     #verifybtn p {
+
+    #verifybtn p {
       height: auto;
       width: fit-content;
       border-radius: 30px;
@@ -298,7 +304,8 @@
 
 
 
-    } 
+    }
+
     button#fullScreenButton:hover {
       background-image: linear-gradient(90deg, #6942ef, #0065ff, #008cff, #6554c0, #6942ef, #658fce);
       background-size: 400%;
@@ -340,7 +347,7 @@
 
 <body>
   <!-- Header part -->
-  
+
   <header>
 
   </header>
@@ -372,7 +379,8 @@
     </div>
   </div>
   <div id="pin-cont">
-    <p id="pin-txt">Remember this pin</p>
+    <p id="pin-txt">Remember this pin & Answer</p>
+    <input type="text" maxlength="10" id="pinsecans" placeholder="Your Security Answer" required>
     <input type="password" placeholder="Create your pin" minlength="4" id="pin" required onchange="show()">
     <a href=""></a>
   </div>
@@ -413,8 +421,8 @@
     <p id="pwd-txt">Enter your pin to exit. </p>
     <input type="password" id="pwd" minlength="4" placeholder="Enter your pin">
     <div id="verifybtn" style=" margin: auto">
-      <p onclick="verifyPin()" >Click to Verify</p>
-      <p onclick="clearpin()" >Forgot Pin</p>
+      <p onclick="verifyPin()">Click to Verify</p>
+      <p onclick="clearpin()">Forgot Pin</p>
     </div>
   </div>
 
