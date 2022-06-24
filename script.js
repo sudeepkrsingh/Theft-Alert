@@ -33,9 +33,13 @@ window.addEventListener('load', function () {
 
 })
 function clearpin() {
+  alert("Your saved audio & video will be deleted!")
+  setTimeout(hum, 000)
+  function hum() {
   localStorage.clear()
   show()
   window.location.reload();
+  }
 }
 
 function show() {
@@ -206,6 +210,8 @@ function verifyPin() {
       document.querySelector('#fullScreenButton').style.display = "block";
       document.querySelector('.talert-box-container').style.display = "block";
       document.querySelector('#pwd').value = "";
+      document.querySelector('#pwd-cont').style.display = "none";
+
     }
     else {
       alert("You Entered Wrong Pin");
