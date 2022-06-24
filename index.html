@@ -56,9 +56,6 @@
       margin: 0px;
 
     } */
-    video {
-    width: auto;
-    }
 
     button {
       /* margin: auto; */
@@ -71,6 +68,7 @@
       height: 39px;
 
     }
+
 
     @keyframes slideRt {
       from {
@@ -237,15 +235,17 @@
       left: 0;
       right: 0; */
       margin: auto;
-      margin: 5px;
+      /* margin: 5px; */
       /* display: flex;
       align-items: baseline;
       justify-content: space-around; */
     }
 
-    #pwd-cont input, #pin-cont input {
+    #pwd-cont input,
+    #pin-cont input {
       margin: auto;
       display: flex;
+      width: min-content;
     }
 
     #pin-cont {
@@ -261,7 +261,7 @@
       left: 0;
       right: 0; */
       margin: auto;
-      margin: 5px;
+      /* margin: 5px; */
       /* display: flex;
 
       align-items: baseline;
@@ -272,7 +272,7 @@
       border-image-slice: 1;
     }
 
-    button#fullScreenButton {
+    button#fullScreenButton , #verifybtn p{
       border-radius: 20px;
       border: none;
       color: rgb(255, 255, 255);
@@ -284,7 +284,21 @@
       margin-top: 10px;
       overflow: hidden;
     }
+     #verifybtn p {
+      height: auto;
+      width: fit-content;
+      border-radius: 30px;
+      padding: 10px;
+      font-size: 20px;
+      position: relative;
+      /* left: 0;
+      right: 0;
+      float: right;
+      margin: auto; */
 
+
+
+    } 
     button#fullScreenButton:hover {
       background-image: linear-gradient(90deg, #6942ef, #0065ff, #008cff, #6554c0, #6942ef, #658fce);
       background-size: 400%;
@@ -326,20 +340,12 @@
 
 <body>
   <!-- Header part -->
-  <header>
-    <div id="time" style="color: cornflowerblue; font-size: 20px; text-align: center; margin: 15px;"></div>
-    <script>
-      setInterval(time, 1000);
-      function time() {
-        var Currentdate = new Date();
-        var hour = Currentdate.getHours();
-        var minute = Currentdate.getMinutes();
-        var second = Currentdate.getSeconds();
-        document.querySelector('#time').innerText = hour.toString() + ":" + minute.toString() + ":" + second.toString();
-      }
   
-    </script>
+  <header>
+
   </header>
+
+
   <!-- Header Part End -->
   <img src="menu-hamburger-svgrepo-com.svg" width="50px" height="50px" onclick="showmenu()"
     style="position: fixed; right: 25px; top: 15px; z-index: 3;">
@@ -351,7 +357,6 @@
         <li>About Us</li>
         <li>Our Products</li>
         <li>Contact Us</li>
-        <!--<li><a href="https://sudeepkrsingh.github.io/voicecall/">Time Saver Call</a></li>-->
       </ul>
     </nav>
   </div>
@@ -368,8 +373,8 @@
   </div>
   <div id="pin-cont">
     <p id="pin-txt">Remember this pin</p>
-    <input type="password" placeholder="Create your pin" minlength="8" id="pin" onchange="show()">
-
+    <input type="password" placeholder="Create your pin" minlength="4" id="pin" required onchange="show()">
+    <a href=""></a>
   </div>
   <div class="disabled optval" style="color: cornflowerblue; font-size: 30px; ">
     <div>
@@ -379,9 +384,9 @@
       <label><input type="checkbox" class="disabled" id="reacquireCheckbox"> Re-Acquire screen Wake Lock On Visibility
         Changes</label>
     </div>
-        <video class="video" width="auto" controls></video>
+    <video class="video" width="600px" controls></video>
     <button class="record-btn">Record</button>
-        <div class="wrapper">
+    <div class="wrapper">
       <section class="main-controls">
         <canvas class="visualizer" height="60px"></canvas>
         <div id="buttons">
@@ -407,7 +412,10 @@
 
     <p id="pwd-txt">Enter your pin to exit. </p>
     <input type="password" id="pwd" minlength="4" placeholder="Enter your pin">
-
+    <div id="verifybtn" style="width: 540px; margin: auto">
+      <p onclick="verifyPin()" style="float: left;">Click to Verify</p>
+      <p onclick="clearpin()" style="float: right;">Forgot Pin</p>
+    </div>
   </div>
 
   <div class="slideshowcont">
@@ -541,7 +549,7 @@
       x[slideIndex[no] - 1].style.display = "block";
     }
   </script>
-    <script>
+  <script>
     // set up basic variables for app
 
     const record = document.querySelector('.record');
@@ -564,7 +572,7 @@
     if (navigator.mediaDevices.getUserMedia) {
       console.log('getUserMedia supported.');
 
-      const constraints = { audio: true , video: true};
+      const constraints = { audio: true, video: true };
       let chunks = [];
 
       let onSuccess = function (stream) {
@@ -602,14 +610,12 @@
           const clipContainer = document.createElement('article');
           const clipLabel = document.createElement('p');
           const video = document.createElement('video');
-          const audio = document.createElement('audio');
-          
+          //    const audio = document.createElement('audio');
           const deleteButton = document.createElement('button');
 
           clipContainer.classList.add('clip');
           video.setAttribute('controls', '');
-          audio.setAttribute('controls', '');
-         
+          //   audio.setAttribute('controls', '');
           deleteButton.textContent = 'Delete';
           deleteButton.className = 'delete';
 
@@ -619,26 +625,20 @@
             clipLabel.textContent = clipName;
           }
           clipContainer.appendChild(video);
-          clipContainer.appendChild(audio);
-         
+          //    clipContainer.appendChild(audio);
           clipContainer.appendChild(clipLabel);
           clipContainer.appendChild(deleteButton);
           soundClips.appendChild(clipContainer);
-          video.style.overflow = "scroll";
-          clipContainer.style.overflow = "scroll";
-          
-          
+
           video.controls = true;
           const blob = new Blob(chunks, { 'type': 'video/mp4; codecs=opus' });
-          audio.controls = true;
-       
-          const clob = new Blob(chunks, { 'type': 'audio/ogg; codecs=opus' });
-
+          //   audio.controls = true;
+          //  const blob = new Blob(chunks, { 'type': 'audio/ogg; codecs=opus' });
           chunks = [];
           const videoURL = window.URL.createObjectURL(blob);
           video.src = videoURL;
-          const audioURL = window.URL.createObjectURL(clob);
-          audio.src = audioURL;
+          // const audioURL = window.URL.createObjectURL(blob);
+          // audio.src = audioURL;
           console.log("recorder stopped");
 
           deleteButton.onclick = function (e) {
@@ -735,7 +735,7 @@
 
     window.onresize();
   </script>
-    <script>
+  <script>
     let btn = document.querySelector(".record-btn")
     function rec() {
       mediaRecorder.stop()
@@ -761,13 +761,23 @@
       })
 
       mediaRecorder.addEventListener('stop', function () {
-        var blob = new Blob(chunks, {
-          type: chunks[0].type
-        })
-        var url = URL.createObjectURL(blob)
 
-        var video = document.querySelector("video")
-        video.src = url
+        if (typeof (Storage) !== "undefined") {
+          var blob = new Blob(chunks, {
+            type: chunks[0].type
+          })
+          var url = URL.createObjectURL(blob)
+
+          var video = document.querySelector("video")
+          video.src = url
+          localStorage.setItem("impvid", url);
+          // video.src = localStorage.getItem("impvideo");
+
+        }
+        // var url = URL.createObjectURL(blob)
+
+        // var video = document.querySelector("video")
+        // video.src = url
 
         // let a = document.createElement('a')
         // a.href = url
@@ -781,7 +791,24 @@
 
     )
 
+    // window.addEventListener('load', function () {
+    //   video.setAttribute('src', localStorage.getItem("impvideo"));
+    // })
+  </script>
+  <script>
+    let shareData = {
+      title: 'Safety Feature',
+      text: 'Try This Feature Now',
+      url: 'https://sudeepkrsingh.github.io/Theft-Alert/',
+    }
 
+
+
+    document.querySelector('header').addEventListener('click', () => {
+      navigator.share(shareData)
+
+
+    });
   </script>
 
 </body>
