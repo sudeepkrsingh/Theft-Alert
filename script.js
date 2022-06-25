@@ -36,9 +36,9 @@ function clearpin() {
   alert("Your saved audio & video will be deleted!")
   setTimeout(hum, 000)
   function hum() {
-  localStorage.clear()
-  show()
-  window.location.reload();
+    localStorage.clear()
+    show()
+    window.location.reload();
   }
 }
 
@@ -203,19 +203,19 @@ function verifyPin() {
   var pin = document.querySelector('#pin').value;
   var pwd = document.querySelector('#pwd').value;
   if (pwd === localStorage.getItem("imppin") && pwd != "") {
-      document.querySelector('button').style.display = "block";
-      document.querySelector('.disabled').style.display = "block";
-      document.querySelector('#pin-cont').style.visibility = "hidden";
-      document.querySelector('#pin-cont').style.display = "none";
-      document.querySelector('#fullScreenButton').style.display = "block";
-      document.querySelector('.talert-box-container').style.display = "block";
-      document.querySelector('#pwd').value = "";
-      document.querySelector('#pwd-cont').style.display = "none";
+    document.querySelector('button').style.display = "block";
+    document.querySelector('.disabled').style.display = "block";
+    document.querySelector('#pin-cont').style.visibility = "hidden";
+    document.querySelector('#pin-cont').style.display = "none";
+    document.querySelector('#fullScreenButton').style.display = "block";
+    document.querySelector('.talert-box-container').style.display = "block";
+    document.querySelector('#pwd').value = "";
+    document.querySelector('#pwd-cont').style.display = "none";
 
-    }
-    else {
-      alert("You Entered Wrong Pin");
-       window.location.reload();
-    }
   }
+  else {
+    alert("You Entered Wrong Pin");
+    window.location.reload();
+  }
+}
 
