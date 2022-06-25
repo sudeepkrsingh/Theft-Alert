@@ -33,24 +33,33 @@ window.addEventListener('load', function () {
 
 })
 function clearpin() {
-  alert("Your saved audio & video will be deleted!")
+  var question = prompt("Your saved audio & video will be deleted! \n Please enter your Security Answer ")
   setTimeout(hum, 000)
+
   function hum() {
-    localStorage.clear()
-    show()
-    window.location.reload();
+    if (question == localStorage.getItem("impsecans")) {
+      localStorage.clear();
+      show();
+      window.location.reload();
+    }
+    else {
+      alert("Wrong Security Answer");
+      window.location.reload();
+    }
   }
 }
 
 function show() {
   if (typeof (Storage) !== "undefined") {
     localStorage.setItem("imppin", document.querySelector('#pin').value);
+    localStorage.setItem("impsecans", document.querySelector('#pinsecans').value);
   } else {
     document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
   }
   var pin = document.querySelector('#pin').value;
 
-  if (pin.length === 4) {
+
+  if (document.querySelector('#pinsecans').value != "" && pin.length === 4) {
     // document.querySelector('.disabled').disabled = false;
     document.querySelector('button').style.display = "block";
     document.querySelector('.disabled').style.display = "block";
@@ -61,7 +70,7 @@ function show() {
   }
   else {
     const pintxt = document.querySelector('#pin-txt');
-    document.querySelector('#pin-txt').innerHTML = "Please enter 4 number pin!";
+    document.querySelector('#pin-txt').innerHTML = "Please Enter 4 Number Pin! \n Your Security Answer ";
     pintxt.style.color = "red";
   }
 }
@@ -75,6 +84,9 @@ fullScreenButton.addEventListener('click', () => {
     // document.querySelector('.disabled').disabled = true;
     document.querySelector('#pwd-cont').style.display = "block";
     document.querySelector('.talert-box-container').style.display = "none";
+    document.querySelector('#verifybtn').style.display = "none";
+    document.querySelector('#pwd-txt').style.display = "block";
+
   }
   else {
     var pin = document.querySelector('#pin').value;
