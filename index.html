@@ -353,7 +353,18 @@
   <!-- Header part -->
 
   <header>
+<div id="time" style="color: cornflowerblue; font-size: 20px; text-align: center; margin: 15px;"></div>
+    <script>
+      setInterval(time, 1000);
+      function time() {
+        var Currentdate = new Date();
+        var hour = Currentdate.getHours();
+        var minute = Currentdate.getMinutes();
+        var second = Currentdate.getSeconds();
+        document.querySelector('#time').innerText = hour.toString() + ":" + minute.toString() + ":" + second.toString();
+      }
 
+    </script>
   </header>
 
 
